@@ -1,35 +1,54 @@
+import 'package:aula_01/domain/conversa.dart';
 import 'package:flutter/material.dart';
 
 class ChatListPage extends StatelessWidget {
-  const ChatListPage({super.key});
+  List<Conversa> conversas = [
+    Conversa(
+      contato: 'Ewerton Costa', 
+      ultimaMsg: 'Não vou reprová-los', 
+      horario: '16:20', 
+      naoLidas: 1,
+      inicial: 'EC',
+      ),
+    Conversa(
+      contato: 'Warlles Machado', 
+      ultimaMsg: 'Não vai escapar ninguém', 
+      horario: '16:30', 
+      naoLidas: 10,
+      inicial: 'WM',
+      ),
+  ];
+  ChatListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Conversas')),
-      body: ListView(
-        children: [
-          ListTile(
-            title: Text('José Eduardo'),
-            subtitle: Text('Aula maravilhosa!'),
+      body: ListView.builder(
+        itemCount: conversas.length,
+        itemBuilder: (BuildContext context, int i) {
+          Conversa conversa = conversas[i];
+          return ListTile(
+            title: Text(conversa.contato),
+            subtitle: Text(conversa.ultimaMsg),
             leading: CircleAvatar(
-              child: Text('JE'),
               backgroundColor: Colors.pinkAccent,
               foregroundColor: Colors.white,
+              child: Text(conversa.inicial),
               ),
             trailing: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text('7:00'),
+                Text(conversa.horario),
                 Badge(
-                  label: Text('1'),
+                  label: Text('${conversa.naoLidas}'),
                   backgroundColor: Colors.green,
                 ),
               ],
             ),
-          )
-        ],
-      )
+          );
+        },
+        ),
     );
   }
 }
