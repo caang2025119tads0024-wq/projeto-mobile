@@ -1,23 +1,9 @@
 import 'package:aula_01/domain/conversa.dart';
+import 'package:aula_01/infra/conversa_respository.dart';
 import 'package:flutter/material.dart';
 
 class ChatListPage extends StatelessWidget {
-  List<Conversa> conversas = [
-    Conversa(
-      contato: 'Ewerton Costa', 
-      ultimaMsg: 'Não vou reprová-los', 
-      horario: '16:20', 
-      naoLidas: 1,
-      inicial: 'EC',
-      ),
-    Conversa(
-      contato: 'Warlles Machado', 
-      ultimaMsg: 'Não vai escapar ninguém', 
-      horario: '16:30', 
-      naoLidas: 10,
-      inicial: 'WM',
-      ),
-  ];
+  ConversaRespository repo = ConversaRespository(); 
   ChatListPage({super.key});
 
   @override
@@ -25,9 +11,9 @@ class ChatListPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('Conversas')),
       body: ListView.builder(
-        itemCount: conversas.length,
+        itemCount: repo.conversas.length,
         itemBuilder: (BuildContext context, int i) {
-          Conversa conversa = conversas[i];
+          Conversa conversa = repo.conversas[i];
           return ListTile(
             title: Text(conversa.contato),
             subtitle: Text(conversa.ultimaMsg),
@@ -40,10 +26,8 @@ class ChatListPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(conversa.horario),
-                Badge(
-                  label: Text('${conversa.naoLidas}'),
-                  backgroundColor: Colors.green,
-                ),
+                conversa.naoLidas > 0 
+                   ? Badge(label:   Text('${conversa.naoLidas}')) :SizedBox(),
               ],
             ),
           );
