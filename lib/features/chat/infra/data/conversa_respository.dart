@@ -1,5 +1,5 @@
 
-import 'package:aula_01/domain/conversa.dart';
+import 'package:aula_01/features/chat/domain/entities/conversa.dart';
 
 class ConversaRespository {
   // BD

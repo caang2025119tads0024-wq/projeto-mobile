@@ -1,9 +1,9 @@
-import 'package:aula_01/domain/conversa.dart';
-import 'package:aula_01/infra/conversa_respository.dart';
+import 'package:aula_01/features/chat/domain/entities/conversa.dart';
+import 'package:aula_01/features/chat/infra/data/conversa_respository.dart';
 import 'package:flutter/material.dart';
 
 class ChatListPage extends StatelessWidget {
-  ConversaRespository repo = ConversaRespository(); 
+  final ConversaRespository repo = ConversaRespository(); 
   ChatListPage({super.key});
 
   @override
