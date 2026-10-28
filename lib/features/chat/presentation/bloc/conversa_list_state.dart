@@ -1,3 +1,8 @@
-sealed class ConversaListEvent {}
 
-class ConversaListInitialize extends ConversaListEvent{}
+sealed class ConversaListState {}
+
+class ConversaListLoading extends ConversaListState{}
+
+class ConversaListSuccess extends ConversaListState {}
+
+class ConversalistFailure extends ConversaListState {}
