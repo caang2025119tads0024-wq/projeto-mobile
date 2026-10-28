@@ -8,9 +8,14 @@ class ConversaListBloc extends Bloc<ConversaListEvent, ConversaListState> {
   final ConversaRespository conversaRepo = ConversaRespository();
 
   ConversaListBloc() : super(ConversaListLoading()) {
-    // on<ConversaListInitialize>((event, emit)async {
-    //   List<Conversa> dados = conversaRepo.conversas;
-
-    // }) 
+    on<ConversaListInitialize>((event, emit)async {
+      List<Conversa> dados = conversaRepo.conversas;
+      await Future.delayed(const Duration(seconds: 5));
+      if (dados.isNotEmpty) {
+        emit(ConversaListSuccess(conversas: dados));
+      } else {
+        emit(ConversalistFailure(msg: 'Sem dados'));
+      }
+    });
   }
 }
